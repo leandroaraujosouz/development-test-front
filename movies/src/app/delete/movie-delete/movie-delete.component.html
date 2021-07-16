@@ -1,0 +1,28 @@
+<div class="container molde">
+  <div class="row mb-5">
+      <div class="col-md-12">
+          <h1 class="text-center text-secondary">Apagar Filme</h1>
+      </div>
+  </div>
+
+  <div class="row mb-3">
+      <div class="col-md-12">
+          <h4 class="text-center text-secondary">Você tem certeza que deseja apagar esse Filme?</h4>
+      </div>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
+          <h5 class="text-center">Titulo: {{movie.title}}</h5>
+          <p class="text-center">Genero: {{movie.genres}}</p>
+
+      </div>
+  </div>
+
+  <div class="row mt-5">
+      <div class="col-md-12 d-flex justify-content-center">
+          <button class="btn btn-danger text-white mr-4" routerLink='/movies'>Não</button>
+          <button class="btn btn-success text-white" (click)='apagar()'>Sim</button>
+      </div>
+  </div>
+</div>

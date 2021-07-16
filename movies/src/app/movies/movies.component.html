@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <h1 class="text-center form-font">Catálogo de Filmes</h1>
+    </div>
+  </div>
+
+  <!-- pesquisa -->
+  <div id="pesquisa" class="row d-flex align-items-end justify-content-center">
+
+    <div class="col-lg-3" id="divTitulo">
+      <div class="form-group mb-0 roboto-font">
+        <label for="title"></label>
+        <input [(ngModel)]="movie.title" type="text" class="form-control" id="title"
+          placeholder="Titulo">
+      </div>
+    </div>
+    <div class="col-lg-3" id="divGenero">
+      <div class="form-group mb-0 roboto-font">
+        <label for="genres"></label>
+        <input [(ngModel)]="movie.genres" type="text" class="form-control" id="genres"
+          placeholder="Genero">
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="form-group mb-0 roboto-font">
+        <label for="zona"></label>
+        <select [(ngModel)]="opcao" name="zona" (change)="escolha()" id="zona" class="form-control">
+          <option value="Titulo" selected>Titulo</option>
+          <option value="Genero">Genero</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-lg-2 mt-3 text-center">
+      <div>
+        <button type="submit" class="btn btn-success form-font" (click)="consultar()">Consultar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row text-center mt-5">
+    <div class="col-md-12">
+
+      <p class="text-center roboto-font">
+        Deseja cadastrar um novo Filme? <a routerLink='/cadastrar-movie'>Cadastre aqui</a>
+      </p>
+    </div>
+  </div>
+  <!-- /pesquisa -->
+</div>
+
+<div class="container-fluid" id="listaRemedios">
+  <div class="table-responsive" style="overflow: auto; height: 500px; ">
+      <table class="table table-hover roboto-font mt-4">
+          <thead>
+              <tr>
+                  <th scope="col">
+                      <div class="d-flex justify-content-center align-items-center">Titulo</div>
+                  </th>
+                  <th scope="col">
+                      <div class="d-flex justify-content-center align-items-center">Genero</div>
+                  </th>
+                  <th></th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor='let itens of listaMovie'>
+                  <td>{{itens.title}}</td>
+                  <td>{{itens.genres}}</td>
+
+                  <td>
+                      <button class="btn btn-info form-font"
+                          [routerLink]="['/movie-edit',itens.movieId]">Editar</button>
+                  </td>
+                  <td>
+                      <button class="btn btn-danger form-font"
+                          [routerLink]="['/movie-delete',itens.movieId]">Deletar</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+<!-- /listaRemedios  -->
