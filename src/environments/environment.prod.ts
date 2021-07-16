@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: 'http://fivesoftwaremovies.herokuapp.com'
+  server: 'https://fivesoftwaremovies.herokuapp.com'
 };
