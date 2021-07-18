@@ -13,20 +13,20 @@ export class MoviesService {
     private http: HttpClient
   ) { }
 
-  getAllMovies(): Observable <Movie[]>{
-    return this.http.get<Movie[]>(`${environment.server}/movies`)
+  getAllMovies(page: number){
+    return this.http.get<any>(`${environment.server}/movies/?page=${page}`)
   }
 
   getByIdMovie(id: number): Observable <Movie>{
     return this.http.get<Movie>(`${environment.server}/movies/${id}`)
   }
 
-  getByTitleMovie(title: String): Observable <Movie[]>{
-    return this.http.get<Movie[]>(`${environment.server}/movies/titulo/${title}`)
+  getByTitleMovie(page:number, title: String){
+    return this.http.get<any>(`${environment.server}/movies/titulo/${title}?page=${page}`)
   }
 
-  getByGenreMovie(genre: String): Observable <Movie[]>{
-    return this.http.get<Movie[]>(`${environment.server}/movies/genero/${genre}`)
+  getByGenreMovie(page:number, genre: String){
+    return this.http.get<any>(`${environment.server}/movies/genero/${genre}?page=${page}`)
   }
 
   postMovie(movie: Movie): Observable<Movie>{

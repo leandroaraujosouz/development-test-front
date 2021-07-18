@@ -11,15 +11,13 @@
     <div class="col-lg-3" id="divTitulo">
       <div class="form-group mb-0 roboto-font">
         <label for="title"></label>
-        <input [(ngModel)]="movie.title" type="text" class="form-control" id="title"
-          placeholder="Titulo">
+        <input [(ngModel)]="movie.title" type="text" class="form-control" id="title" placeholder="Titulo">
       </div>
     </div>
     <div class="col-lg-3" id="divGenero">
       <div class="form-group mb-0 roboto-font">
         <label for="genres"></label>
-        <input [(ngModel)]="movie.genres" type="text" class="form-control" id="genres"
-          placeholder="Genero">
+        <input [(ngModel)]="movie.genres" type="text" class="form-control" id="genres" placeholder="Genero">
       </div>
     </div>
     <div class="col-lg-2">
@@ -53,35 +51,58 @@
 
 <div class="container-fluid" id="listaRemedios">
   <div class="table-responsive" style="overflow: auto; height: 500px; ">
-      <table class="table table-hover roboto-font mt-4">
-          <thead>
-              <tr>
-                  <th scope="col">
-                      <div class="d-flex justify-content-center align-items-center">Titulo</div>
-                  </th>
-                  <th scope="col">
-                      <div class="d-flex justify-content-center align-items-center">Genero</div>
-                  </th>
-                  <th></th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor='let itens of listaMovie'>
-                  <td>{{itens.title}}</td>
-                  <td>{{itens.genres}}</td>
+    <table class="table table-hover roboto-font mt-4">
+      <thead>
+        <tr>
+          <th scope="col">
+            <div class="d-flex justify-content-center align-items-center">Titulo</div>
+          </th>
+          <th scope="col">
+            <div class="d-flex justify-content-center align-items-center">Genero</div>
+          </th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let itens of listaMovie'>
+          <td>{{itens.title}}</td>
+          <td>{{itens.genres}}</td>
 
-                  <td>
-                      <button class="btn btn-info form-font"
-                          [routerLink]="['/movie-edit',itens.movieId]">Editar</button>
-                  </td>
-                  <td>
-                      <button class="btn btn-danger form-font"
-                          [routerLink]="['/movie-delete',itens.movieId]">Deletar</button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
+          <td>
+            <button class="btn btn-info form-font" [routerLink]="['/movie-edit',itens.movieId]">Editar</button>
+          </td>
+          <td>
+            <button class="btn btn-danger form-font" [routerLink]="['/movie-delete',itens.movieId]">Deletar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 <!-- /listaRemedios  -->
+<div class="container">
+  <div class="row d-flex justify-content-center text-center">
+    <div class="col-md-4">
+     <p class="mb-1">Paginas: {{totalPage}}</p>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-1 d-flex align-items-end justify-content-end">
+      <div class="form-group">
+        <button (click)="pgAnterior()" type="button" class="btn btn-outline-secondary"><i class="fa fa-caret-left"
+          aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <div class="form-group d-flex flex-column justify-content-center">
+        <input (change)="pgAtual()" [(ngModel)]="page" type="text" class="form-control text-center" id="page" size="2">
+      </div>
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <div class="form-group">
+        <button (click)="pgProxima()" type="button" class="btn btn-outline-secondary"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+</div>

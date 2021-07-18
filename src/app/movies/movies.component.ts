@@ -16,6 +16,9 @@ export class MoviesComponent implements OnInit {
   divGenero: any
   txtTitulo: any
   txtGenero: any
+  page: number = 0
+  totalPage: number
+  tipoConsulta: number //1: findAll, 2: findByTitulo, 3: findByGenero
 
   opcao: string = "Titulo"
 
@@ -32,6 +35,7 @@ export class MoviesComponent implements OnInit {
     this.txtGenero = window.document.querySelector("#genres")
     this.txtTitulo = window.document.querySelector("#title")
     this.divGenero.style.display = "none"
+
   }
 
   escolha() {
@@ -68,24 +72,66 @@ export class MoviesComponent implements OnInit {
     }
   }
   findAllMovies() {
-    this.moviesService.getAllMovies().subscribe((resp: Movie[]) => {
-      this.listaMovie = resp
+    this.moviesService.getAllMovies(this.page).subscribe((resp: any) => {
+      this.totalPage = resp.totalPages
+      console.log(this.totalPage)
+      this.listaMovie = resp.content
+      this.tipoConsulta = 1
     })
   }
 
   findByTitleMovie() {
-    this.moviesService.getByTitleMovie(this.movie.title).subscribe((resp: Movie[]) => {
-      this.listaMovie = resp
+    this.moviesService.getByTitleMovie(this.page, this.movie.title).subscribe((resp: any) => {
+      this.totalPage = resp.totalPages
+      this.listaMovie = resp.content
+      this.tipoConsulta = 2
     })
   }
 
   findAllByGenres() {
-    this.moviesService.getByGenreMovie(this.movie.genres).subscribe((resp: Movie[]) => {
-      this.listaMovie = resp
+    this.moviesService.getByGenreMovie(this.page, this.movie.genres).subscribe((resp: any) => {
+      this.totalPage = resp.totalPages
+      this.listaMovie = resp.content
+      this.tipoConsulta = 3
     })
   }
 
+  pgAnterior() {
+    if (this.page > 0) {
+      this.page -= 1
+      if (this.tipoConsulta == 1)
+        this.findAllMovies()
+      else if (this.tipoConsulta == 2)
+        this.findByTitleMovie()
+      else if (this.tipoConsulta == 3)
+        this.findAllByGenres()
+    }
 
+  }
 
+  pgProxima() {
+    if (this.page < this.totalPage) {
+      this.page++
+      if (this.tipoConsulta == 1)
+        this.findAllMovies()
+      else if (this.tipoConsulta == 2)
+        this.findByTitleMovie()
+      else if (this.tipoConsulta == 3)
+        this.findAllByGenres()
+    }
+  }
+
+  pgAtual() {
+    if (this.page >= 0 && this.page <= this.totalPage) {
+      if (this.tipoConsulta == 1)
+        this.findAllMovies()
+      else if (this.tipoConsulta == 2)
+        this.findByTitleMovie()
+      else if (this.tipoConsulta == 3)
+        this.findAllByGenres()
+    }else{
+      alert("Pagina não encontrada!")
+    }
+  }
 
 }
