@@ -19,6 +19,7 @@ export class MoviesComponent implements OnInit {
   page: number = 0
   totalPage: number
   tipoConsulta: number //1: findAll, 2: findByTitulo, 3: findByGenero
+  consultaAtual: number = 1 //1: findAll, 2: findByTitulo, 3: findByGenero
 
   opcao: string = "Titulo"
 
@@ -72,15 +73,24 @@ export class MoviesComponent implements OnInit {
     }
   }
   findAllMovies() {
+    if(this.consultaAtual != 1)
+    {
+      this.page = 0
+      this.consultaAtual = 1
+    }
     this.moviesService.getAllMovies(this.page).subscribe((resp: any) => {
       this.totalPage = resp.totalPages
-      console.log(this.totalPage)
       this.listaMovie = resp.content
       this.tipoConsulta = 1
     })
   }
 
   findByTitleMovie() {
+    if(this.consultaAtual != 2)
+    {
+      this.page = 0
+      this.consultaAtual = 2
+    }
     this.moviesService.getByTitleMovie(this.page, this.movie.title).subscribe((resp: any) => {
       this.totalPage = resp.totalPages
       this.listaMovie = resp.content
@@ -89,6 +99,11 @@ export class MoviesComponent implements OnInit {
   }
 
   findAllByGenres() {
+    if(this.consultaAtual != 3)
+    {
+      this.page = 0
+      this.consultaAtual = 3
+    }
     this.moviesService.getByGenreMovie(this.page, this.movie.genres).subscribe((resp: any) => {
       this.totalPage = resp.totalPages
       this.listaMovie = resp.content
